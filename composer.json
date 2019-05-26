@@ -1,0 +1,26 @@
+{
+  "name": "hydra/exchange",
+  "description": "Exchange core modules",
+  "keywords": ["exchange", "core", "hydra", "php"],
+  "homepage": "https://github.com/hydra-network/exchange-core",
+  "type": "library",
+  "license": "MIT",
+  "support": {
+    "source": "https://github.com/hydra-network/exchange-core"
+  },
+  "authors": [
+    {
+      "name": "Ilya Pistol",
+      "email": "admin@dvizh.net"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Hydra\\Exchange\\": "src\\"
+    }
+  }
+}
