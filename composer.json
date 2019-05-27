@@ -1,5 +1,5 @@
 {
-  "name": "hydra/exchange",
+  "name": "hydraex/exchange",
   "description": "Exchange core modules",
   "keywords": ["exchange", "core", "hydra", "php"],
   "homepage": "https://github.com/hydra-network/exchange-core",
