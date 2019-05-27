@@ -3,12 +3,12 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Hydra\Exchange\Entities\Pair;
-use Hydra\Exchange\Entities\BuyOrder;
-use Hydra\Exchange\Entities\SellOrder;
-use Hydra\Exchange\Entities\Balance;
-use Hydra\Exchange\Entities\Asset;
-use Hydra\Exchange\Libs\Matcher;
+use Hydraex\Exchange\Entities\Pair;
+use Hydraex\Exchange\Entities\BuyOrder;
+use Hydraex\Exchange\Entities\SellOrder;
+use Hydraex\Exchange\Entities\Balance;
+use Hydraex\Exchange\Entities\Asset;
+use Hydraex\Exchange\Libs\Matcher;
 
 class MatchingTest extends TestCase
 {

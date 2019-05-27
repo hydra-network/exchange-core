@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydra\Exchange\Interfaces\Entities;
+namespace Hydraex\Exchange\Interfaces\Entities;
 
 interface Order
 {

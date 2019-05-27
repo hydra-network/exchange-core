@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydra\Exchange\Entities;
+namespace Hydraex\Exchange\Entities;
 
-class Pair implements \Hydra\Exchange\Interfaces\Entities\Pair
+class Pair implements \Hydraex\Exchange\Interfaces\Entities\Pair
 {
     private $primary;
     private $secondary;

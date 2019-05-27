@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydra\Exchange\Entities;
+namespace Hydraex\Exchange\Entities;
 
 class BuyOrder extends Abstracts\Order
 {

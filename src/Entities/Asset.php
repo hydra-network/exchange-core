@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydra\Exchange\Entities;
+namespace Hydraex\Exchange\Entities;
 
-class Asset implements \Hydra\Exchange\Interfaces\Entities\Asset
+class Asset implements \Hydraex\Exchange\Interfaces\Entities\Asset
 {
     private $code;
     private $name;

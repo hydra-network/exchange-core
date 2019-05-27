@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydra\Exchange\Entities\Abstracts;
+namespace Hydraex\Exchange\Entities\Abstracts;
 
-abstract class Order implements \Hydra\Exchange\Interfaces\Entities\Order
+abstract class Order implements \Hydraex\Exchange\Interfaces\Entities\Order
 {
     private $quantity;
     private $quantity_remain;

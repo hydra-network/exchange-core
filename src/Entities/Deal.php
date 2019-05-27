@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydra\Exchange\Entities;
+namespace Hydraex\Exchange\Entities;
 
-class Deal implements \Hydra\Exchange\Interfaces\Entities\Deal, \Hydra\Exchange\Interfaces\ToArrayable
+class Deal implements \Hydraex\Exchange\Interfaces\Entities\Deal, \Hydraex\Exchange\Interfaces\ToArrayable
 {
     private $quantity;
     private $price;

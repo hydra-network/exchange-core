@@ -1,8 +1,8 @@
 <?php
 
-namespace Hydra\Exchange\Entities;
+namespace Hydraex\Exchange\Entities;
 
-class Balance implements \Hydra\Exchange\Interfaces\Entities\Balance
+class Balance implements \Hydraex\Exchange\Interfaces\Entities\Balance
 {
     private $primary = 0;
     private $secondary = 0;
