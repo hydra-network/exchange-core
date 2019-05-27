@@ -1,8 +1,10 @@
 <?php
 
-namespace Hydraex\Exchange\Entities;
+namespace Hydra\Exchange\Entities;
 
-class Balance implements \Hydraex\Exchange\Interfaces\Entities\Balance
+use \Hydra\Exchange\Interfaces\Entities\Balance as iBalance;
+
+class Balance implements \Hydra\Exchange\Interfaces\Entities\Balance
 {
     private $primary = 0;
     private $secondary = 0;
@@ -15,38 +17,38 @@ class Balance implements \Hydraex\Exchange\Interfaces\Entities\Balance
 
     public function getPrimary() : int
     {
-        return $this->primaryBalance;
+        return $this->primary;
     }
 
     public function getSecondary() : int
     {
-        return $this->secondaryBalance;
+        return $this->secondary;
     }
 
-    public function outcomePromary(int $quantity) : self
+    public function outcomePrimary(int $quantity) : iBalance
     {
-        $this->buyBalance = $this->buyBalance-$quantity;
+        $this->primary = $this->primary-$quantity;
 
         return $this;
     }
 
-    public function outcomeSecondary(int $quantity) : self
+    public function outcomeSecondary(int $quantity) : iBalance
     {
-        $this->sellBalance = $this->sellBalance-$quantity;
+        $this->secondary = $this->secondary-$quantity;
 
         return $this;
     }
 
-    public function incomePrimary(int $quantity) : self
+    public function incomePrimary(int $quantity) : iBalance
     {
-        $this->buyBalance = $this->buyBalance+$quantity;
+        $this->primary = $this->primary+$quantity;
 
         return $this;
     }
 
-    public function incomeSecondary(int $quantity) : self
+    public function incomeSecondary(int $quantity) : iBalance
     {
-        $this->sellBalance = $this->sellBalance+$quantity;
+        $this->secondary = $this->secondary+$quantity;
 
         return $this;
     }

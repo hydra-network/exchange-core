@@ -1,11 +1,14 @@
 <?php
 
-namespace Hydraex\Exchange\Entities;
+namespace Hydra\Exchange\Entities;
+
+use \Hydra\Exchange\Interfaces\Entities\Balance as iBalance;
+use \Hydra\Exchange\Interfaces\Entities\Pair as iPair;
 
 class BuyOrder extends Abstracts\Order
 {
-    public function __construct(int $id, Pair $pair, int $quantity, int $price, Balance $balance, int $date = null)
+    public function __construct(iPair $pair, int $quantity, int $price, iBalance $balance, int $date = null)
     {
-        return parent::__construct($id, $pair, $quantity, $price, $balance, $date, Order::TYPE_BUY);
+        return parent::__construct($pair, $quantity, $price, $balance, $date, Abstracts\Order::TYPE_BUY);
     }
 }

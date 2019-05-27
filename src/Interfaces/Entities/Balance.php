@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydraex\Exchange\Interfaces\Entities;
+namespace Hydra\Exchange\Interfaces\Entities;
 
 interface Balance
 {
@@ -8,11 +8,11 @@ interface Balance
 
     public function getSecondary() : int;
 
-    public function outcomePrimary(int $quantity) : self;
+    public function outcomePrimary(int $quantity) : Balance;
 
-    public function outcomeSecondary(int $quantity) : self;
+    public function outcomeSecondary(int $quantity) : Balance;
 
-    public function incomePrimary(int $quantity) : self;
+    public function incomePrimary(int $quantity) : Balance;
 
-    public function incomeSecondary(int $quantity) : self;
+    public function incomeSecondary(int $quantity) : Balance;
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hydraex\Exchange\Libs;
+namespace Hydra\Exchange\Libs;
 
-use Hydraex\Exchange\Entities\Order;
-use Hydraex\Exchange\Entities\Deal;
+use Hydra\Exchange\Entities\Order;
+use Hydra\Exchange\Entities\Deal;
 
 class Matcher
 {

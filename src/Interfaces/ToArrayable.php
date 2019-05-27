@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydraex\Exchange\Interfaces;
+namespace Hydra\Exchange\Interfaces;
 
 interface ToArrayable
 {

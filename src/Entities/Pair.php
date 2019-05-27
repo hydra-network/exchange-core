@@ -1,8 +1,10 @@
 <?php
 
-namespace Hydraex\Exchange\Entities;
+namespace Hydra\Exchange\Entities;
 
-class Pair implements \Hydraex\Exchange\Interfaces\Entities\Pair
+use \Hydra\Exchange\Interfaces\Entities\Asset as iAsset;
+
+class Pair implements \Hydra\Exchange\Interfaces\Entities\Pair
 {
     private $primary;
     private $secondary;
@@ -13,12 +15,12 @@ class Pair implements \Hydraex\Exchange\Interfaces\Entities\Pair
         $this->secondary = $secondary;
     }
 
-    public function getPrimary() : Asset
+    public function getPrimary() : iAsset
     {
         return $this->primar;
     }
 
-    public function getSecondary() : Asset
+    public function getSecondary() : iAsset
     {
         return $this->secondary;
     }

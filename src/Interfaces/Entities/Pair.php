@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydraex\Exchange\Interfaces\Entities;
+namespace Hydra\Exchange\Interfaces\Entities;
 
 interface Pair
 {

@@ -1,8 +1,6 @@
 <?php
 
-namespace Hydraex\Exchange\Interfaces\Entities;
-
-use App\Models\Order;
+namespace Hydra\Exchange\Interfaces\Entities;
 
 interface Deal
 {
@@ -14,5 +12,5 @@ interface Deal
 
     public function getSellOrder() : Order;
 
-    public function execute() : self;
+    public function execute() : Deal;
 }

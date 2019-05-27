@@ -1,8 +1,12 @@
 <?php
 
-namespace Hydraex\Exchange\Entities\Abstracts;
+namespace Hydra\Exchange\Entities\Abstracts;
 
-abstract class Order implements \Hydraex\Exchange\Interfaces\Entities\Order
+use \Hydra\Exchange\Interfaces\Entities\Order as iOrder;
+use \Hydra\Exchange\Interfaces\Entities\Pair as iPair;
+use \Hydra\Exchange\Interfaces\Entities\Balance as iBalance;
+
+abstract class Order implements iOrder
 {
     private $quantity;
     private $quantity_remain;
@@ -15,7 +19,7 @@ abstract class Order implements \Hydraex\Exchange\Interfaces\Entities\Order
     const TYPE_BUY = 1;
     const TYPE_SELL = 2;
 
-    public function __construct(Pair $pair, int $quantity, int $price, Balance $balance, int $date = null, int $type)
+    public function __construct(iPair $pair, int $quantity, int $price, iBalance $balance, int $date = null, int $type)
     {
         $this->pair = $pair;
         $this->quantity = $quantity;
@@ -61,31 +65,31 @@ abstract class Order implements \Hydraex\Exchange\Interfaces\Entities\Order
         return $this->date;
     }
 
-    public function getBalance() : Balance
+    public function getBalance() : iBalance
     {
         return $this->trader;
     }
 
-    public function getPair() : Pair
+    public function getPair() : iPair
     {
         return $this->pair;
     }
 
-    public function removeQuantity() : self
+    public function removeQuantity() : iOrder
     {
         $this->quantity_remain = 0;
 
         return $this;
     }
 
-    public function minusQuantity($amount) : int
+    public function minusQuantity($amount) : iOrder
     {
         $this->quantity_remain = $this->quantity_remain-$amount;
 
         return $this;
     }
 
-    public function plusQuantity($amount) : int
+    public function plusQuantity($amount) : iOrder
     {
         $this->quantity_remain = $this->quantity_remain+$amount;
 

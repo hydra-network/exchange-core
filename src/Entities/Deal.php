@@ -1,8 +1,11 @@
 <?php
 
-namespace Hydraex\Exchange\Entities;
+namespace Hydra\Exchange\Entities;
 
-class Deal implements \Hydraex\Exchange\Interfaces\Entities\Deal, \Hydraex\Exchange\Interfaces\ToArrayable
+use \Hydra\Exchange\Interfaces\Entities\Order as iOrder;
+use \Hydra\Exchange\Interfaces\Entities\Deal as iDeal;
+
+class Deal implements \Hydra\Exchange\Interfaces\Entities\Deal, \Hydra\Exchange\Interfaces\ToArrayable
 {
     private $quantity;
     private $price;
@@ -10,7 +13,7 @@ class Deal implements \Hydraex\Exchange\Interfaces\Entities\Deal, \Hydraex\Excha
     private $sellOrder;
     private $executedAt;
 
-    public function __construct($price, Order $buyOrder, Order $sellOrder)
+    public function __construct($price, iOrder $buyOrder, iOrder $sellOrder)
     {
         $this->price = $price;
         $this->buyOrder = $buyOrder;
@@ -27,17 +30,17 @@ class Deal implements \Hydraex\Exchange\Interfaces\Entities\Deal, \Hydraex\Excha
         return $this->quantity;
     }
 
-    public function getBuyOrder() : Order
+    public function getBuyOrder() : iOrder
     {
         return $this->buyOrder;
     }
 
-    public function getSellOrder() : Order
+    public function getSellOrder() : iOrder
     {
         return $this->sellOrder;
     }
 
-    public function execute() : self
+    public function execute() : iDeal
     {
         $buyerBid = $this->buyOrder;
         $sellerBid = $this->sellOrder;
@@ -58,11 +61,11 @@ class Deal implements \Hydraex\Exchange\Interfaces\Entities\Deal, \Hydraex\Excha
 
         $cost = round($this->quantity * $this->price, 8);
 
-        $buyerBid->getBalance()->newOutcome1($cost);
-        $sellerBid->getBalance()->newOutcome2($this->quantity);
+        $buyerBid->getBalance()->outcomePrimary($cost);
+        $sellerBid->getBalance()->outcomeSecondary($this->quantity);
 
-        $buyerBid->getBalance()->newIncome2($this->quantity);
-        $sellerBid->getBalance()->newIncome1($cost);
+        $buyerBid->getBalance()->incomeSecondary($this->quantity);
+        $sellerBid->getBalance()->incomePrimary($cost);
 
         $this->executedAt = time();
 
@@ -73,9 +76,7 @@ class Deal implements \Hydraex\Exchange\Interfaces\Entities\Deal, \Hydraex\Excha
     {
         return [
             'price' => $this->getPrice(),
-            'quantity' => $this->getQuantity(),
-            'buy_order_id' => $this->getBuyOrder()->getId(),
-            'sell_order_id' => $this->getSellOrder()->getId(),
+            'quantity' => $this->getQuantity()
         ];
     }
 }

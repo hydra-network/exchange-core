@@ -1,6 +1,6 @@
 <?php
 
-namespace Hydraex\Exchange\Interfaces\Entities;
+namespace Hydra\Exchange\Interfaces\Entities;
 
 interface Order
 {
@@ -11,11 +11,11 @@ interface Order
 
     public function getQuantity() : int;
 
-    public function removeQuantity() : self;
+    public function removeQuantity() : Order;
 
-    public function minusQuantity(int $amount) : self;
+    public function minusQuantity(int $amount) : Order;
 
-    public function plusQuantity(int $amount) : self;
+    public function plusQuantity(int $amount) : Order;
 
     public function getQuantityRemain() : int;
 
