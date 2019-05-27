@@ -2,23 +2,24 @@
 
 namespace Hydra\Exchange\Entities;
 
-class Pair {
-    private $currency1;
-    private $currency2;
+class Pair implements \Hydra\Exchange\Interfaces\Entities\Pair
+{
+    private $primary;
+    private $secondary;
 
-    public function __construct(Currency $currency1, Currency $currency2)
+    public function __construct(Asset $primary, Asset $secondary)
     {
-        $this->currency1 = $currency1;
-        $this->currency2 = $currency2;
+        $this->primary = $primary;
+        $this->secondary = $secondary;
     }
 
-    public function getCurrency1() : Currency
+    public function getPrimary() : Asset
     {
-        return $this->currency1;
+        return $this->primar;
     }
 
-    public function getCurrency2() : Currency
+    public function getSecondary() : Asset
     {
-        return $this->currency2;
+        return $this->secondary;
     }
 }

@@ -5,12 +5,13 @@ namespace Hydra\Exchange\Libs;
 use Hydra\Exchange\Entities\Order;
 use Hydra\Exchange\Entities\Deal;
 
-class Matcher {
+class Matcher
+{
     private $buyOrders;
     private $sellOrders;
     private $deals;
 
-    public function __construct($buyOrders, $sellOrders)
+    public function __construct(array $buyOrders, array $sellOrders)
     {
         $this->buyOrders = $buyOrders;
         $this->sellOrders = $sellOrders;

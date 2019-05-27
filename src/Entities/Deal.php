@@ -2,7 +2,8 @@
 
 namespace Hydra\Exchange\Entities;
 
-class Deal {
+class Deal implements \Hydra\Exchange\Interfaces\Entities\Deal, \Hydra\Exchange\Interfaces\ToArrayable
+{
     private $quantity;
     private $price;
     private $buyOrder;
@@ -16,27 +17,27 @@ class Deal {
         $this->sellOrder = $sellOrder;
     }
 
-    public function getPrice()
+    public function getPrice() : int
     {
         return $this->price;
     }
 
-    public function getQuantity()
+    public function getQuantity() : int
     {
         return $this->quantity;
     }
 
-    public function getBuyOrder()
+    public function getBuyOrder() : Order
     {
         return $this->buyOrder;
     }
 
-    public function getSellOrder()
+    public function getSellOrder() : Order
     {
         return $this->sellOrder;
     }
 
-    public function execute()
+    public function execute() : self
     {
         $buyerBid = $this->buyOrder;
         $sellerBid = $this->sellOrder;
@@ -57,18 +58,18 @@ class Deal {
 
         $cost = round($this->quantity * $this->price, 8);
 
-        $buyerBid->getTrader()->newOutcome1($cost);
-        $sellerBid->getTrader()->newOutcome2($this->quantity);
+        $buyerBid->getBalance()->newOutcome1($cost);
+        $sellerBid->getBalance()->newOutcome2($this->quantity);
 
-        $buyerBid->getTrader()->newIncome2($this->quantity);
-        $sellerBid->getTrader()->newIncome1($cost);
+        $buyerBid->getBalance()->newIncome2($this->quantity);
+        $sellerBid->getBalance()->newIncome1($cost);
 
         $this->executedAt = time();
 
         return $this;
     }
 
-    public function toArray()
+    public function toArray() : array
     {
         return [
             'price' => $this->getPrice(),

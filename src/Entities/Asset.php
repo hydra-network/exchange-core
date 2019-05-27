@@ -2,22 +2,23 @@
 
 namespace Hydra\Exchange\Entities;
 
-class Currency {
+class Asset implements \Hydra\Exchange\Interfaces\Entities\Asset
+{
     private $code;
     private $name;
 
-    public function __construct($code, $name)
+    public function __construct(string $code, string $name)
     {
         $this->code = $code;
         $this->name = $name;
     }
 
-    public function getCode()
+    public function getCode() : string
     {
         return $this->code;
     }
 
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
