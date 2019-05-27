@@ -11,7 +11,7 @@ abstract class Order implements iOrder
     private $quantity;
     private $quantity_remain;
     private $price;
-    private $date;
+    private $order;
     private $balance;
     private $pair;
     private $type;
@@ -19,14 +19,14 @@ abstract class Order implements iOrder
     const TYPE_BUY = 1;
     const TYPE_SELL = 2;
 
-    public function __construct(iPair $pair, int $quantity, int $price, iBalance $balance, int $date = null, int $type)
+    public function __construct(iPair $pair, int $quantity, int $price, iBalance $balance, int $order = null, int $type)
     {
         $this->pair = $pair;
         $this->quantity = $quantity;
         $this->quantity_remain = $quantity;
         $this->price = $price;
         $this->trader = $balance;
-        $this->date = $date;
+        $this->order = $order;
         $this->type = $type;
     }
 
@@ -60,9 +60,9 @@ abstract class Order implements iOrder
         return $this->quantity_remain * $this->price;
     }
 
-    public function getDate() : int
+    public function getOrderNumber() : int
     {
-        return $this->date;
+        return $this->order;
     }
 
     public function getBalance() : iBalance

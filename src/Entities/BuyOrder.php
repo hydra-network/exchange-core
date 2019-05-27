@@ -7,8 +7,8 @@ use \Hydra\Exchange\Interfaces\Entities\Pair as iPair;
 
 class BuyOrder extends Abstracts\Order
 {
-    public function __construct(iPair $pair, int $quantity, int $price, iBalance $balance, int $date = null)
+    public function __construct(iPair $pair, int $quantity, int $price, iBalance $balance, int $order = null)
     {
-        return parent::__construct($pair, $quantity, $price, $balance, $date, Abstracts\Order::TYPE_BUY);
+        return parent::__construct($pair, $quantity, $price, $balance, $order, Abstracts\Order::TYPE_BUY);
     }
 }

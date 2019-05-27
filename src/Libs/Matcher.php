@@ -2,59 +2,59 @@
 
 namespace Hydra\Exchange\Libs;
 
-use Hydra\Exchange\Entities\Order;
-use Hydra\Exchange\Entities\Deal;
+use Hydra\Exchange\Interfaces\Entities\Order as iOrder;
+use Hydra\Exchange\Excaptions\Deal as DealException;
 
 class Matcher
 {
-    private $buyOrders;
-    private $sellOrders;
-    private $deals;
+    private $buyOrder;
+    private $sellOrder;
 
-    public function __construct(array $buyOrders, array $sellOrders)
+    public function __construct(iOrder $buyOrder, iOrder $sellOrder)
     {
-        $this->buyOrders = $buyOrders;
-        $this->sellOrders = $sellOrders;
+        $this->buyOrder = $buyOrder;
+        $this->sellOrder = $sellOrder;
     }
 
-    public function getBuyOrders()
+    public function getBuyOrder() : iOrder
     {
-        return $this->buyOrders;
+        return $this->buyOrder;
     }
 
-    public function getSellOrders()
+    public function getSellOrder() : iOrder
     {
-        return $this->sellOrders;
+        return $this->sellOrder;
     }
 
-    public function getDeals()
+    public function matching() : ?Deal
     {
-        return $this->deals;
-    }
+        Logger::write("Matching inited");
 
-    public function match()
-    {
-        $deals = [];
-        foreach ($this->buyOrders as $key => $buyerBid) {
-            foreach ($this->sellOrders as $sellerBid) {
-                if ($buyerBid->getQuantityRemain() > 0 && $buyerBid->getPrice() >= $sellerBid->getPrice()) {
-                    $price = self::detectPrice($buyerBid, $sellerBid);
+        $buyerBid = $this->buyOrder;
+        $sellerBid = $this->sellOrder;
 
-                    $deal = new Deal($price, $buyerBid, $sellerBid);
-                    $deal->execute();
-                    $deals[] = $deal;
-                }
+        if ($buyerBid->getQuantityRemain() > 0 && $buyerBid->getPrice() >= $sellerBid->getPrice()) {
+            $price = self::detectPrice($buyerBid, $sellerBid);
+
+            Logger::write("Orders are matched, the price is $price");
+
+            $deal = new Deal($price, $buyerBid, $sellerBid);
+
+            if ($deal->execute()) {
+                Logger::write("Deal successfully created");
+
+                return $deal;
+            } else {
+                throw new DealException("Unable to execute the deal");
             }
         }
 
-        $this->deals = $deals;
-
-        return $this;
+        return null;
     }
 
     private static function detectPrice($buyerBid, $sellerBid)
     {
-        if ($sellerBid->getDate() > $buyerBid->getDate()) {
+        if ($sellerBid->getOrderNumber() > $buyerBid->getOrderNumber()) {
             $price = $buyerBid->getPrice();
         } else {
             $price = $buyerBid->getPrice();

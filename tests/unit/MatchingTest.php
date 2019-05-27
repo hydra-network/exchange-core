@@ -1,14 +1,16 @@
 <?php
 
-namespace Tests\Unit;
+namespace Hydra\Exchange\Tests\Unit;
 
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 use Hydra\Exchange\Entities\Pair;
 use Hydra\Exchange\Entities\BuyOrder;
 use Hydra\Exchange\Entities\SellOrder;
-use Hydra\Exchange\Entities\Balance;
+use Hydra\Exchange\Entities\SellerBalance;
+use Hydra\Exchange\Entities\BuyerBalance;
 use Hydra\Exchange\Entities\Asset;
 use Hydra\Exchange\Libs\Matcher;
+use Hydra\Exchange\Libs\Logger;
 
 class MatchingTest extends TestCase
 {
@@ -17,43 +19,42 @@ class MatchingTest extends TestCase
      */
     public function testBuyOneOrder()
     {
-        $balances = [
-            1 => new Balance(100, 100),
-            2 => new Balance(99, 99),
-            3 => new Balance(88, 88),
-            4 => new Balance(87, 87),
-            5 => new Balance(86, 86),
-            6 => new Balance(85, 85),
-            7 => new Balance(84, 84),
-        ];
+        $sellerBalance = new SellerBalance(100, 99);
+        $buyersBalance = new BuyerBalance(99, 89);
 
-        $pair = new Pair(new Asset("BTC", "Bitcoin"), new Asset("ETH", "Ether"));
+        //Check balance before
+        $this->assertEquals(100, $sellerBalance->getPrimary());
+        $this->assertEquals(99, $sellerBalance->getSecondary());
+        $this->assertEquals(99, $buyersBalance->getPrimary());
+        $this->assertEquals(89, $buyersBalance->getSecondary());
 
-        $buyOrders = [
-            new BuyOrder($pair, 100, 100, $balances[1], time() + 10),
-            new BuyOrder($pair, 99, 101, $balances[2], time() + 20),
-            new BuyOrder($pair, 98, 102, $balances[3], time() + 30),
-            new BuyOrder($pair, 97, 103, $balances[1], time() + 40),
-            new BuyOrder($pair, 96, 104, $balances[4], time() + 50),
-            new BuyOrder($pair, 95, 105, $balances[5], time() + 60),
-        ];
+        $pair = new Pair(
+            new Asset("BTC", "Bitcoin"), //primary asset
+            new Asset("ETH", "Ether") //secondary asset
+        );
 
-        $sellOrders = [
-            new SellOrder($pair, 10, 102, $balances[3], time() + 5),
-            new SellOrder($pair, 50, 101, $balances[4], time() + 6),
-            new SellOrder($pair, 100, 100, $balances[5], time() + 7),
-            new SellOrder($pair, 150, 99, $balances[6], time() + 8),
-            new SellOrder($pair, 200, 98, $balances[7], time() + 9),
-            new SellOrder($pair, 250, 97, $balances[6], time() + 10),
-        ];
+        $buyOrder = new BuyOrder($pair, 100, 100, $buyersBalance, 2);
+        $sellOrder = new SellOrder($pair, 10, 99, $sellerBalance, 1);
 
-        $matcher = new Matcher($buyOrders, $sellOrders);
-        $deals = $matcher->match()->getDeals();
+        $matcher = new Matcher($buyOrder, $sellOrder);
+        $deal = $matcher->matching();
 
-        foreach ($deals as $deal) {
-            var_dump($deal->toArray());
-        }
+        //Check deal result
+        $this->assertEquals(1, $deal->getType());
+        $this->assertEquals(100, $deal->getPrice());
+        $this->assertEquals(10, $deal->getQuantity());
 
-        die;
+
+        //Check balance after
+        $this->assertEquals(1100, $sellerBalance->getPrimary());
+        $this->assertEquals(89, $sellerBalance->getSecondary());
+        $this->assertEquals(-901, $buyersBalance->getPrimary());
+        $this->assertEquals(99, $buyersBalance->getSecondary());
+
+
+
+        echo '===========';
+        var_dump(Logger::list());
+        echo '===========';
     }
 }

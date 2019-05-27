@@ -4,6 +4,8 @@ namespace Hydra\Exchange\Interfaces\Entities;
 
 interface Balance
 {
+    public function getOwnerType() : string;
+
     public function getPrimary() : int;
 
     public function getSecondary() : int;

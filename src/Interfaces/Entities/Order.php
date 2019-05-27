@@ -4,7 +4,6 @@ namespace Hydra\Exchange\Interfaces\Entities;
 
 interface Order
 {
-
     public function getType() : int;
 
     public function getPrice() : int;
@@ -23,7 +22,7 @@ interface Order
 
     public function getCostRemain() : int;
 
-    public function getDate() : int; //timestamp
+    public function getOrderNumber() : int; //id
 
     public function getBalance() : Balance;
 
