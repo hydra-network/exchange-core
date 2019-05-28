@@ -18,7 +18,7 @@ abstract class Order implements iOrder
 
     const STATUS_ACTIVE = 1;
     const STATUS_PARTIAL = 2;
-    const STATUS_RAN_OUT = 3;
+    const STATUS_EMPTY = 3;
 
     const TYPE_BUY = 1;
     const TYPE_SELL = 2;
@@ -37,7 +37,7 @@ abstract class Order implements iOrder
     public function getStatus() : int
     {
         if ($this->quantity_remain == 0) {
-            return self::STATUS_RAN_OUT;
+            return self::STATUS_EMPTY;
         }
 
         if ($this->quantity == $this->quantity_remain) {

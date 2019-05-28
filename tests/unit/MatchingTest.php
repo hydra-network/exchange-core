@@ -41,7 +41,7 @@ class MatchingTest extends TestCase
         //it will cost 10 units of the secondary asset
         $sellOrder = new SellOrder($pair, 10, 9, $sellerBalance, 2);
 
-        $this->assertEquals('11', (string)$buyOrder->getStatus() . $sellOrder->getStatus());
+        $this->assertEquals((string) Order::STATUS_ACTIVE . (string) Order::STATUS_ACTIVE, (string)$buyOrder->getStatus() . $sellOrder->getStatus());
 
         //exchange should take the two top orders from orderbook and sent them to matching
         $matcher = new Matcher($buyOrder, $sellOrder);
@@ -63,7 +63,7 @@ class MatchingTest extends TestCase
         $this->assertEquals(90, $buyOrder->getQuantityRemain());
         $this->assertEquals(0, $sellOrder->getQuantityRemain());
 
-        $this->assertEquals('23', (string)$buyOrder->getStatus() . $sellOrder->getStatus());
+        $this->assertEquals((string) Order::STATUS_PARTIAL . (string) Order::STATUS_EMPTY, (string) $buyOrder->getStatus() . $sellOrder->getStatus());
     }
 
     public function testSellerBalanceCrash()
