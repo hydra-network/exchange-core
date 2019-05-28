@@ -3,7 +3,7 @@
 namespace Hydra\Exchange\Libs;
 
 use Hydra\Exchange\Interfaces\Entities\Order as iOrder;
-use Hydra\Exchange\Excaptions\Deal as DealException;
+use Hydra\Exchange\Exceptions\Deal as DealException;
 
 class Matcher
 {
@@ -57,7 +57,7 @@ class Matcher
         if ($sellerBid->getOrderNumber() > $buyerBid->getOrderNumber()) {
             $price = $buyerBid->getPrice();
         } else {
-            $price = $buyerBid->getPrice();
+            $price = $sellerBid->getPrice();
         }
 
         return $price;

@@ -11,7 +11,7 @@ class Balance implements \Hydra\Exchange\Interfaces\Entities\Balance
     private $secondary = 0;
     private $ownerType;
 
-    const OWNER_TYPE_BUYER = "buyer";
+    const OWNER_BUYER_TAKERER = "buyer";
     const OWNER_TYPE_SELLER = "seller";
 
     public function __construct(int $primary, int $secondary, $ownerType)

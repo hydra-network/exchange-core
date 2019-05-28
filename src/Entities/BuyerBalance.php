@@ -9,6 +9,6 @@ class BuyerBalance extends Abstracts\Balance
 {
     public function __construct(int $primary, int $secondary)
     {
-        return parent::__construct($primary, $secondary, Abstracts\Balance::OWNER_TYPE_BUYER);
+        return parent::__construct($primary, $secondary, Abstracts\Balance::OWNER_BUYER_TAKERER);
     }
 }

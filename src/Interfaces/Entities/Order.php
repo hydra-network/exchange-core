@@ -4,6 +4,8 @@ namespace Hydra\Exchange\Interfaces\Entities;
 
 interface Order
 {
+    public function getStatus() : int;
+
     public function getType() : int;
 
     public function getPrice() : int;

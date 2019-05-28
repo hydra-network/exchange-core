@@ -14,8 +14,8 @@ class Deal implements iDeal, \Hydra\Exchange\Interfaces\ToArrayable
     private $executedAt;
     private $type;
 
-    const TYPE_BID_SELLER = 1;
-    const TYPE_BID_BUYER = 2;
+    const TYPE_SELLER_TAKER = 1;
+    const TYPE_BUYER_TAKER = 2;
 
     public function __construct($price, iOrder $buyOrder, iOrder $sellOrder)
     {
@@ -76,10 +76,10 @@ class Deal implements iDeal, \Hydra\Exchange\Interfaces\ToArrayable
 
         $this->type = $this->detectType();
 
-        if ($this->type == Deal::TYPE_BID_BUYER) {
-            Logger::write("Buyer is BID and seller is ASK");
+        if ($this->type == Deal::TYPE_BUYER_TAKER) {
+            Logger::write("The buyer is taker");
         } else {
-            Logger::write("Seller is BID and seller is BID");
+            Logger::write("The seller is taker");
         }
 
 
@@ -95,18 +95,17 @@ class Deal implements iDeal, \Hydra\Exchange\Interfaces\ToArrayable
 
         $this->executedAt = time();
 
-        Logger::write("Exacuted at {$this->executedAt}");
+        Logger::write("Executed at {$this->executedAt}");
 
         return $this;
     }
 
-
-    private function detectType()
+    protected function detectType()
     {
         if ($this->sellOrder->getOrderNumber() > $this->buyOrder->getOrderNumber()) {
-            return self::TYPE_BID_BUYER;
+            return self::TYPE_BUYER_TAKER;
         } else {
-            return self::TYPE_BID_SELLER;
+            return self::TYPE_SELLER_TAKER;
         }
     }
 
