@@ -47,10 +47,10 @@ $deal = $matcher->matching();
 
 echo "Deal price is " . $deal->getPrice() . "\n";
 echo "Deal quantity is " . $deal->getQuantity() . "\n";
-echo "Buyer BTC balance is " . $buyersBalance->getPrimary()() . "\n";
-echo "Buyer ETH balance is " . $buyersBalance->getSecondary()() . "\n";
-echo "Seller BTC balance is " . $sellerBalance->getPrimary()() . "\n";
-echo "Seller ETH balance is " . $sellerBalance->getSecondary()() . "\n";
+echo "Buyer BTC balance is " . $buyersBalance->getPrimary() . "\n";
+echo "Buyer ETH balance is " . $buyersBalance->getSecondary() . "\n";
+echo "Seller BTC balance is " . $sellerBalance->getPrimary() . "\n";
+echo "Seller ETH balance is " . $sellerBalance->getSecondary() . "\n";
 echo "Buy order now contains only " . $buyOrder->getQuantityRemain() . " ETH \n";
 echo "Sell order now contains " . $buyOrder->getQuantityRemain() . " ETH and his status is " . $sellOrder->getStatus() . "\n";
 echo "Log: ";
