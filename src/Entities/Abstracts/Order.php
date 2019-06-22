@@ -29,9 +29,32 @@ abstract class Order implements iOrder
         $this->quantity = $quantity;
         $this->quantity_remain = $quantity;
         $this->price = $price;
-        $this->trader = $balance;
+        $this->balance = $balance;
         $this->orderNumber = $orderNumber;
         $this->type = $type;
+
+        $this->freezeBalance();
+    }
+
+    public function freezeBalance()
+    {
+        if ($this->type == self::TYPE_BUY) {
+            $cost = ($this->quantity * $this->price);
+            $this->balance->outcomePrimary($cost);
+        } else {
+            $this->balance->outcomeSecondary($this->quantity);
+        }
+    }
+
+    public function unfreezeBalance()
+    {
+        if ($this->type == self::TYPE_BUY) {
+            $quantity = ($this->quantity_remain*$this->price);
+            $this->balance->incomePrimary($quantity);
+        } else {
+            $quantity = $this->quantity_remain;
+            $this->balance->incomeSecondary($quantity);
+        }
     }
 
     public function getStatus() : int
@@ -84,7 +107,7 @@ abstract class Order implements iOrder
 
     public function getBalance() : iBalance
     {
-        return $this->trader;
+        return $this->balance;
     }
 
     public function getPair() : iPair

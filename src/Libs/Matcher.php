@@ -34,6 +34,9 @@ class Matcher
         $sellerBid = $this->sellOrder;
 
         if ($buyerBid->getQuantityRemain() > 0 && $buyerBid->getPrice() >= $sellerBid->getPrice()) {
+            $buyerBid->unfreezeBalance();
+            $sellerBid->unfreezeBalance();
+
             $price = self::detectPrice($buyerBid, $sellerBid);
 
             Logger::write("Orders are matched, the price is $price");

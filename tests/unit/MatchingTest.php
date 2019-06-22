@@ -21,6 +21,29 @@ class MatchingTest extends TestCase
     /**
      * @return void
      */
+    public function testFreezeingOfAssets()
+    {
+        $pair = new Pair(
+            new Asset("BTC", "Bitcoin"), //primary asset
+            new Asset("ETH", "Ether") //secondary asset
+        );
+
+        $buyersBalance = new BuyerBalance(1001, 89);
+        $sellerBalance = new SellerBalance(99, 11);
+
+        $buyOrder = new BuyOrder($pair, 100, 10, $buyersBalance, 1);
+        $sellOrder = new SellOrder($pair, 10, 9, $sellerBalance, 2);
+
+        //check balance freezing before execution
+        $this->assertEquals(1, $buyersBalance->getPrimary());
+        $this->assertEquals(89, $buyersBalance->getSecondary());
+        $this->assertEquals(99, $sellerBalance->getPrimary());
+        $this->assertEquals(1, $sellerBalance->getSecondary());
+    }
+
+    /**
+     * @return void
+     */
     public function testBasicExchanging()
     {
         $pair = new Pair(
