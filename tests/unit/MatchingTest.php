@@ -3,18 +3,12 @@
 namespace Hydra\Exchange\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Hydra\Exchange\Entities\Pair;
 use Hydra\Exchange\Libs\Deal;
 use Hydra\Exchange\Entities\Abstracts\Order;
-use Hydra\Exchange\Entities\BuyOrder;
-use Hydra\Exchange\Entities\SellOrder;
-use Hydra\Exchange\Entities\SellerBalance;
-use Hydra\Exchange\Entities\BuyerBalance;
-use Hydra\Exchange\Entities\Asset;
+use Hydra\Exchange\Entities\{Pair, BuyOrder, SellOrder, SellerBalance, BuyerBalance, Asset};
 use Hydra\Exchange\Exceptions\Balance as BalanceException;
 use Hydra\Exchange\Exceptions\Deal as DealException;
-use Hydra\Exchange\Libs\Matcher;
-use Hydra\Exchange\Libs\Logger;
+use Hydra\Exchange\Libs\{Matcher, Logger};
 
 class MatchingTest extends TestCase
 {
