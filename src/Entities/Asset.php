@@ -9,6 +9,10 @@ class Asset implements \Hydra\Exchange\Interfaces\Entities\Asset
 
     public function __construct(string $code, string $name = '')
     {
+        if (!$name) {
+            $name = $code;
+        }
+
         $this->code = $code;
         $this->name = $name;
     }
