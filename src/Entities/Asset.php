@@ -7,7 +7,7 @@ class Asset implements \Hydra\Exchange\Interfaces\Entities\Asset
     private $code;
     private $name;
 
-    public function __construct(string $code, string $name)
+    public function __construct(string $code, string $name = '')
     {
         $this->code = $code;
         $this->name = $name;
