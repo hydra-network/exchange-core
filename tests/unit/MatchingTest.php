@@ -15,6 +15,48 @@ class MatchingTest extends TestCase
     /**
      * @return void
      */
+    public function testFloatPrice()
+    {
+        $pair = new Pair(
+            new Asset("BTC", "Bitcoin"), //primary asset
+            new Asset("ETH", "Ether") //secondary asset
+        );
+
+        $buyersBalance = new BuyerBalance(1001, 89);
+        $sellerBalance = new SellerBalance(99, 11);
+
+        $buyOrder = new BuyOrder($pair, 100, 10.001, $buyersBalance, 1);
+        $sellOrder = new SellOrder($pair, 10, 9.1009, $sellerBalance, 2);
+
+        //check balance freezing before execution
+        $this->assertEquals(0.9, $buyersBalance->getPrimary());
+
+        //exchange should take the two top orders from orderbook and sent them to matching
+        $matcher = new Matcher($buyOrder, $sellOrder);
+        $deal = $matcher->matching();
+
+        //check the deal result
+        $this->assertEquals(Deal::TYPE_BUYER_TAKER, $deal->getType()); //the seller is taker
+        $this->assertEquals(10.001, $deal->getPrice());
+        $this->assertEquals(10, $deal->getQuantity());
+
+        //so, now we can check the client balances
+        $this->assertEquals(900.99, $buyersBalance->getPrimary());
+        $this->assertEquals(99, $buyersBalance->getSecondary());
+
+        $this->assertEquals(199.01, $sellerBalance->getPrimary());
+        $this->assertEquals(1, $sellerBalance->getSecondary());
+
+        //check the remainit volume of assets in orders
+        $this->assertEquals(90, $buyOrder->getQuantityRemain());
+        $this->assertEquals(0, $sellOrder->getQuantityRemain());
+
+        $this->assertEquals((string) Order::STATUS_PARTIAL . (string) Order::STATUS_EMPTY, (string) $buyOrder->getStatus() . $sellOrder->getStatus());
+    }
+
+    /**
+     * @return void
+     */
     public function testFreezeingOfAssets()
     {
         $pair = new Pair(
@@ -76,7 +118,7 @@ class MatchingTest extends TestCase
         $this->assertEquals(199, $sellerBalance->getPrimary());
         $this->assertEquals(1, $sellerBalance->getSecondary());
 
-        //check the remainit colume of assets in orders
+        //check the remainit volume of assets in orders
         $this->assertEquals(90, $buyOrder->getQuantityRemain());
         $this->assertEquals(0, $sellOrder->getQuantityRemain());
 

@@ -8,7 +8,7 @@ interface Order
 
     public function getType() : int;
 
-    public function getPrice() : int;
+    public function getPrice() : float;
 
     public function getQuantity() : int;
 
@@ -20,9 +20,9 @@ interface Order
 
     public function getQuantityRemain() : int;
 
-    public function getCost() : int;
+    public function getCost() : float;
 
-    public function getCostRemain() : int;
+    public function getCostRemain() : float;
 
     public function getOrderNumber() : int; //id
 

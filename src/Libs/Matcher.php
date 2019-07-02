@@ -50,6 +50,8 @@ class Matcher
             } else {
                 throw new DealException("Unable to execute the deal");
             }
+        } else {
+            Logger::write("Orders aren't matched ({$buyerBid->getQuantityRemain()} > 0 && {$buyerBid->getPrice()} >= {$sellerBid->getPrice()}");
         }
 
         return null;

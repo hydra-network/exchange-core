@@ -26,17 +26,17 @@ class Balance implements \Hydra\Exchange\Interfaces\Entities\Balance
         return $this->ownerType;
     }
 
-    public function getPrimary() : int
+    public function getPrimary() : float
     {
         return $this->primary;
     }
 
-    public function getSecondary() : int
+    public function getSecondary() : float
     {
         return $this->secondary;
     }
 
-    public function outcomePrimary(int $quantity) : iBalance
+    public function outcomePrimary(float $quantity) : iBalance
     {
         Logger::write("Outcome primary asset from {$this->ownerType}: {$this->primary}-$quantity");
 
@@ -45,7 +45,7 @@ class Balance implements \Hydra\Exchange\Interfaces\Entities\Balance
         return $this;
     }
 
-    public function outcomeSecondary(int $quantity) : iBalance
+    public function outcomeSecondary(float $quantity) : iBalance
     {
         Logger::write("Outcome secondary asset from {$this->ownerType}: {$this->secondary}-$quantity");
 
@@ -54,7 +54,7 @@ class Balance implements \Hydra\Exchange\Interfaces\Entities\Balance
         return $this;
     }
 
-    public function incomePrimary(int $quantity) : iBalance
+    public function incomePrimary(float $quantity) : iBalance
     {
         Logger::write("Income primary asset from {$this->ownerType}: {$this->primary}+$quantity");
 
@@ -63,7 +63,7 @@ class Balance implements \Hydra\Exchange\Interfaces\Entities\Balance
         return $this;
     }
 
-    public function incomeSecondary(int $quantity) : iBalance
+    public function incomeSecondary(float $quantity) : iBalance
     {
         Logger::write("Income secondary asset from {$this->ownerType}: {$this->secondary}+$quantity");
 

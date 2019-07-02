@@ -8,10 +8,10 @@ use \Hydra\Exchange\Exceptions\Balance as BalanceException;
 
 class BuyOrder extends Abstracts\Order
 {
-    public function __construct(iPair $pair, int $quantity, int $price, iBalance $balance, int $order = null)
+    public function __construct(iPair $pair, int $quantity, float $price, iBalance $balance, int $order = null)
     {
         if ($balance->getPrimary() < $quantity*$price) {
-            throw new BalanceException("insufficient funds (buy order)");
+            throw new BalanceException("insufficient funds (buy order: " . $balance->getPrimary() . " < " . ($quantity*$price) . ")");
         }
 
         return parent::__construct($pair, $quantity, $price, $balance, $order, Abstracts\Order::TYPE_BUY);

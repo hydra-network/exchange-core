@@ -4,7 +4,7 @@ namespace Hydra\Exchange\Libs;
 
 class Logger
 {
-    private static $messages = null;
+    private static $messages = [];
 
     public static function write($message)
     {

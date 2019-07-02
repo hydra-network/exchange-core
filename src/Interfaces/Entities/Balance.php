@@ -6,15 +6,15 @@ interface Balance
 {
     public function getOwnerType() : string;
 
-    public function getPrimary() : int;
+    public function getPrimary() : float;
 
-    public function getSecondary() : int;
+    public function getSecondary() : float;
 
-    public function outcomePrimary(int $quantity) : Balance;
+    public function outcomePrimary(float $quantity) : Balance;
 
-    public function outcomeSecondary(int $quantity) : Balance;
+    public function outcomeSecondary(float $quantity) : Balance;
 
-    public function incomePrimary(int $quantity) : Balance;
+    public function incomePrimary(float $quantity) : Balance;
 
-    public function incomeSecondary(int $quantity) : Balance;
+    public function incomeSecondary(float $quantity) : Balance;
 }

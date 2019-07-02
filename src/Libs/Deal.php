@@ -24,12 +24,12 @@ class Deal implements iDeal, \Hydra\Exchange\Interfaces\ToArrayable
         $this->sellOrder = $sellOrder;
     }
 
-    public function getPrice() : int
+    public function getPrice() : float
     {
         return $this->price;
     }
 
-    public function getQuantity() : int
+    public function getQuantity() : float
     {
         return $this->quantity;
     }
@@ -83,7 +83,7 @@ class Deal implements iDeal, \Hydra\Exchange\Interfaces\ToArrayable
         }
 
 
-        $cost = round($this->quantity * $this->price);
+        $cost = $this->quantity * $this->price;
 
         Logger::write("The cost is $cost, quantity is {$this->quantity}");
 
