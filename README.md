@@ -12,7 +12,7 @@ php composer require hydraex/exchange
 
 ## Basic case of usage
 
-To call the matcher you have to get 2 top orders from left and right orderbooks (sorted by price).
+To call the matcher you have to get 2 top orders from left and right orderbooks (sorted by price) and convert them to Order entity of this repository.
 
 ```php
 //...
