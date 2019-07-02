@@ -12,16 +12,12 @@ php composer require hydraex/exchange
 
 ## Basic case of usage
 
+To call the matcher you have to get 2 top orders from left and right orderbooks (sorted by price).
+
 ```php
 //...
-use Hydra\Exchange\Entities\Pair;
-use Hydra\Exchange\Entities\BuyOrder;
-use Hydra\Exchange\Entities\SellOrder;
-use Hydra\Exchange\Entities\SellerBalance;
-use Hydra\Exchange\Entities\BuyerBalance;
-use Hydra\Exchange\Entities\Asset;
-use Hydra\Exchange\Libs\Matcher;
-use Hydra\Exchange\Libs\Logger;
+use Hydra\Exchange\Entities\{Pair, BuyOrder, SellOrder, SellerBalance, BuyerBalance, Asset};
+use Hydra\Exchange\Libs\{Matcher, Logger};
 //...
 
 //creation of pair
