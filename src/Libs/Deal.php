@@ -102,7 +102,7 @@ class Deal implements iDeal, \Hydra\Exchange\Interfaces\ToArrayable
 
     protected function detectType()
     {
-        if ($this->sellOrder->getOrderNumber() > $this->buyOrder->getOrderNumber()) {
+        if ($this->sellOrder->getOrderNumber() < $this->buyOrder->getOrderNumber()) {
             return self::TYPE_BUYER_TAKER;
         } else {
             return self::TYPE_SELLER_TAKER;
