@@ -36,7 +36,7 @@ class MatchingTest extends TestCase
         $deal = $matcher->matching();
 
         //check the deal result
-        $this->assertEquals(Deal::TYPE_BUYER_TAKER, $deal->getType()); //the seller is taker
+        $this->assertEquals(Deal::TYPE_SELLER_TAKER, $deal->getType()); //the seller is taker
         $this->assertEquals(10.001, $deal->getPrice());
         $this->assertEquals(10, $deal->getQuantity());
 
@@ -107,7 +107,7 @@ class MatchingTest extends TestCase
         $deal = $matcher->matching();
 
         //check the deal result
-        $this->assertEquals(Deal::TYPE_BUYER_TAKER, $deal->getType()); //the seller is taker
+        $this->assertEquals(Deal::TYPE_SELLER_TAKER, $deal->getType()); //the seller is taker
         $this->assertEquals(10, $deal->getPrice());
         $this->assertEquals(10, $deal->getQuantity());
 
