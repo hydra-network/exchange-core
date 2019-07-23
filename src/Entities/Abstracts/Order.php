@@ -23,7 +23,7 @@ abstract class Order implements iOrder
     const TYPE_BUY = 1;
     const TYPE_SELL = 2;
 
-    public function __construct(iPair $pair, int $quantity, float $price, iBalance $balance, int $orderNumber = null, int $type)
+    public function __construct(iPair $pair, float $quantity, float $price, iBalance $balance, int $orderNumber = null, int $type)
     {
         $this->pair = $pair;
         $this->quantity = $quantity;
@@ -80,12 +80,12 @@ abstract class Order implements iOrder
         return $this->price;
     }
 
-    public function getQuantity() : int
+    public function getQuantity() : float
     {
         return $this->quantity;
     }
 
-    public function getQuantityRemain() : int
+    public function getQuantityRemain() : float
     {
         return $this->quantity_remain;
     }

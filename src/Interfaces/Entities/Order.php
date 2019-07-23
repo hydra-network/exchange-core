@@ -10,7 +10,7 @@ interface Order
 
     public function getPrice() : float;
 
-    public function getQuantity() : int;
+    public function getQuantity() : float;
 
     public function removeQuantity() : Order;
 
@@ -18,7 +18,7 @@ interface Order
 
     public function plusQuantity(int $amount) : Order;
 
-    public function getQuantityRemain() : int;
+    public function getQuantityRemain() : float;
 
     public function getCost() : float;
 

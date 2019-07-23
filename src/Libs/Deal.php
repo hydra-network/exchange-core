@@ -55,7 +55,7 @@ class Deal implements iDeal, \Hydra\Exchange\Interfaces\ToArrayable
         $sellerBid = $this->sellOrder;
 
         if ($buyerBid->getQuantityRemain() == $sellerBid->getQuantityRemain()) {
-            Logger::write("Both orders are filled");
+            Logger::write("Both orders are filled (" . $buyerBid->getQuantityRemain() . " == " . $sellerBid->getQuantityRemain() . ")");
 
             $this->quantity = $buyerBid->getQuantityRemain();
             $sellerBid->removeQuantity();
